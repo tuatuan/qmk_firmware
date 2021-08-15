@@ -50,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
     keypos_t key;
 
     if (index == 0) {
@@ -78,4 +78,5 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 
         tap_code16(keycode);
     }
+    return true;
 }
