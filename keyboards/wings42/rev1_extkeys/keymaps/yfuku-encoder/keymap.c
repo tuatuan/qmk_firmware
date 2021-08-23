@@ -136,9 +136,12 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else if (index == 1) { // left ↑
         if (clockwise) {
-            tap_code(KC__VOLDOWN);
+            //tap_code(KC__VOLDOWN);
+            tap_code16(RSA(KC_F11));
+
         } else {
-            tap_code(KC__VOLUP);
+            //tap_code(KC__VOLUP);
+            tap_code16(RSA(KC_F12));
         }
     }
     return true;
