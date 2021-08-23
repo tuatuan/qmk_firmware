@@ -1,2 +1,2 @@
 ENCODER_ENABLE = yes
-VIA=yes
+VIA_ENABLE = yes
