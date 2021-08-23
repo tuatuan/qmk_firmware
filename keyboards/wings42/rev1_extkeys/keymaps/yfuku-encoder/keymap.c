@@ -34,10 +34,20 @@ enum layer_number {
 // cmd_t
 #define KC_G_F LCMD_T(KC_F)
 #define KC_G_J RCMD_T(KC_J)
+#define KC_CMDLBRC LCMD(KC_LBRC)
+#define KC_CMDRBRC LCMD(KC_RBRC)
+#define KC_CMDLCBR LCMD(KC_LCBR)
+#define KC_CMDRCBR LCMD(KC_RCBR)
 
 // ctl_t
 #define KC_C_G LCTL_T(KC_G)
 #define KC_C_H RCTL_T(KC_H)
+
+#define KC_C1 LCTL(KC_1)
+#define KC_C2 LCTL(KC_2)
+#define KC_C3 LCTL(KC_3)
+#define KC_C4 LCTL(KC_4)
+#define KC_C5 LCTL(KC_5)
 
 // alt_t
 #define KC_A_D ALT_T(KC_D)
@@ -83,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----+        |----+----+----+----+----+----|
      LEFT, Z  , X  , C  , V  , B  , NO,  DEL,   N  , M  ,COMM,DOT ,SLSH,RGHT,
   //`----+----+----+----+----+----/        \----+----+----+----+----+----'
-                    DOWN,S_EN,L_SPC,       R_ENT,S_JA,UP
+                CMDLBRC,S_EN,L_SPC,       R_ENT,S_JA,CMDRBRC
   //          `----+----+----+----'        `----+----+----+----'
   ),
 
@@ -99,25 +109,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|        |----+----+----+----+----+----|
          ,    ,    ,LCBR,LBRC,LPRN,  ,   ,  RPRN,RBRC,RCBR,AT  ,CIRC,    ,
   //`----+----+----+----+----+----/        \----+----+----+----+----+----'
-                        ,    ,BSPC         ,    ,    ,RST
+                 CMDLCBR,    ,BSPC         ,    ,    ,RST
   //          `----+----+----+----'        `----+----+----+----'
   ),
 
   [_LOWER] = LAYOUT_kc( \
   //,----+----+----+----+----+----.        ,----+----+----+----+----+----.
-         ,    ,    ,    ,    ,XXXX,         XXXX,EQL ,PLUS,ASTR,PERC,MINS,
+         , C1 , C2 , C3 , C4 , C5 ,         XXXX,EQL ,PLUS,ASTR,PERC,MINS,
   //|----+----+----+----+----+----|        |----+----+----+----+----+----|
          , 1  , 2  , 3  , 4  , 5  ,  ,   ,   6  , 7  , 8  , 9  , 0  ,    ,
   //|----+----+----+----+----+----|        |----+----+----+----+----+----|
          ,    ,    ,    ,    ,    ,  ,   ,      ,    ,COMM,DOT ,SLSH,    ,
   //`----+----+----+----+----+----/        \----+----+----+----+----+----'
-                    RST ,    ,    ,        DEL ,    ,
+                    RST ,    ,    ,        DEL ,    ,CMDRCBR
   //          `----+----+----+----'        `----+----+----+----'
   ),
 
 };
 
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {        // left ↓
         if (clockwise) {
             tap_code(KC_WH_U);
@@ -131,4 +141,5 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             tap_code(KC__VOLUP);
         }
     }
+    return true;
 }
