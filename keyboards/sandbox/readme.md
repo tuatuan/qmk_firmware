@@ -1,10 +1,7 @@
-# sandbox
+# sandbox keyboard
 
-![sandbox](imgur.com image replace me!)
 
-*A short description of the keyboard/project*
-
-* Keyboard Maintainer: [yfuku](https://github.com/yourusername)
+* Keyboard Maintainer: [yfuku](https://github.com/yfuku)
 * Hardware Supported: *The PCBs, controllers supported*
 * Hardware Availability: *Links to where you can find this hardware*
 
