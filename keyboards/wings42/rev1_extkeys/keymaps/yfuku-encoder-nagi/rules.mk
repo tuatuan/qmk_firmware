@@ -6,3 +6,5 @@ COMBO_ENABLE = yes
 SRC += naginata_v13u.c
 
 EXTRAFLAGS += -flto
+
+VIA_ENABLE = yes
