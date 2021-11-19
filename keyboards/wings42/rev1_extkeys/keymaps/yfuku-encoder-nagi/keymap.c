@@ -152,6 +152,22 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         } else {
             tap_code(KC__VOLUP);
         }
+    } else if (index == 2) { // right ↑
+        if (clockwise) {
+            tap_code(KC_WH_U);
+
+        } else {
+            tap_code(KC_WH_D);
+        }
+     } else if (index == 3) { // right ↓
+        if (clockwise) {
+            //tap_code(KC__VOLDOWN);
+            tap_code16(RSA(KC_F12));
+
+        } else {
+            //tap_code(KC__VOLUP);
+            tap_code16(RSA(KC_F11));
+        }
     }
     return true;
 }
