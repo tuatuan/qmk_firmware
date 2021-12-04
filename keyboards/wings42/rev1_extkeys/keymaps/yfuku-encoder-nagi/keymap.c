@@ -91,9 +91,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,----+----+----+----+----+----.        ,----+----+----+----+----+----.
       ESC, Q  , W  , E  , R  , T  ,          Y  , U  , I  , O  , P  ,MINS,
   //|----+----+----+----+----+----|        |----+----+----+----+----+----|
-      TAB, A  ,GS_S,A_D ,G_F ,C_G , NO,  BSPC,  C_H ,G_J ,A_K ,GS_L,SCLN,ESC ,
+      TAB, A  ,GS_S,A_D ,G_F ,C_G , NO,  NO,  C_H ,G_J ,A_K ,GS_L,SCLN,ESC ,
   //|----+----+----+----+----+----+        |----+----+----+----+----+----|
-     LEFT, Z  , X  , C  , V  , B  , NO,  DEL,   N  , M  ,COMM,DOT ,SLSH,RGHT,
+     LEFT, Z  , X  , C  , V  , B  , NO,  NO,   N  , M  ,COMM,DOT ,SLSH,RGHT,
   //`----+----+----+----+----+----/        \----+----+----+----+----+----'
                     EISU,S_EN,L_SPC,       R_ENT,S_JA,KANA2
   //          `----+----+----+----'        `----+----+----+----'
@@ -155,7 +155,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     } else if (index == 2) { // right ↑
         if (clockwise) {
             tap_code(KC_WH_U);
-
         } else {
             tap_code(KC_WH_D);
         }
