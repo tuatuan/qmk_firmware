@@ -1,19 +1,19 @@
-# owl8
+# stickey4
 
-![owl8](https://raw.githubusercontent.com/yfuku/owl8/master/images/owl8.jpg)
+![stickey4](https://raw.githubusercontent.com/yfuku/stickey4/main/images/stickey4.jpeg)
 
 macropad
 
 * Keyboard Maintainer: [yfuku](https://github.com/yfuku)
-* Hardware Supported: owl8 PCB, Pro Micro
-* Hardware Availability: https://yfuku.booth.pm/
+* Hardware Supported: stickey4 PCB, Pro Micro
+* Hardware Availability: https://shop.dailycraft.jp/
 
 Make example for this keyboard (after setting up your build environment):
 
-    make owl8:default
+    make stickey4:default
 
 Flashing example for this keyboard:
 
-    make owl8:default:flash
+    make stickey4:default:flash
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).

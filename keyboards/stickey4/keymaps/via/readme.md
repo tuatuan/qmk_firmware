@@ -1,1 +1,1 @@
-# The via keymap for owl8
+# The via keymap for stickey4
