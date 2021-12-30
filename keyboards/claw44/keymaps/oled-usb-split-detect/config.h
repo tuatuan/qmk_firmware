@@ -18,5 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+<<<<<<< HEAD:keyboards/claw44/keymaps/oled-usb-split-detect/config.h
 #define SPLIT_USB_DETECT
 #define OLED_FONT_H "keyboards/claw44/lib/glcdfont.c"
+=======
+#include "config_common.h"
+
+/* Number of backlighting levels */
+#define BACKLIGHT_LEVELS 3
+>>>>>>> master:keyboards/clueboard/17/config.h
