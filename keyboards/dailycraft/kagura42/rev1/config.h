@@ -146,7 +146,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define BOOTMAGIC_LITE_ROW 0
 // #define BOOTMAGIC_LITE_COLUMN 0
 
-#define ENCODERS_PAD_A { B5, B6, D3 }
-#define ENCODERS_PAD_B { B4, B2, D2 }
+#define ENCODERS_PAD_A { B6, D2, B5 }
+#define ENCODERS_PAD_B { B2, D3, B4 }
 #define ENCODER_RESOLUTION 4
 
