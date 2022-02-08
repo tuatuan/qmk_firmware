@@ -1,1 +1,1 @@
-# The default keymap for bat43
+# The via keymap for kagura42

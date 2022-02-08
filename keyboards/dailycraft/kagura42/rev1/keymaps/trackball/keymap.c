@@ -15,11 +15,20 @@
  */
 #include QMK_KEYBOARD_H
 
+#include "paw3204.h"
+#include "pointing_device.h"
+bool isScrollMode;
+
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
     _BASE,
     _LOWER,
     _RAISE
+};
+
+enum custom_keycodes {
+  QWERTY = SAFE_RANGE,
+  SCRL
 };
 
 #define L_SPC LT(_LOWER, KC_SPC)
@@ -31,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,             KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_RSFT,
         KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,             KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RCTL,
                                    KC_LGUI, KC_LANG2,L_SPC,            R_ENT,   KC_LANG1,KC_RALT,
-        KC_1,    KC_2,    KC_3
+        KC_BTN1,    KC_BTN2,    KC_3
     ),
     [_LOWER] = LAYOUT(
         _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_EQL,  KC_PLUS, KC_ASTR, KC_PERC, _______,
@@ -72,3 +81,87 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return false;
 }
 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case SCRL:
+      if (record->event.pressed) {
+        isScrollMode = true;
+        dprint("scroll ON\n");
+      }
+      else {
+        isScrollMode = false;
+        dprint("scroll OFF\n");
+      }
+      return false;
+  }
+  return true;
+}
+
+void matrix_init_user(void) {
+    init_paw3204();
+}
+
+void matrix_scan_user(void) {
+    static int  cnt;
+    static bool paw_ready;
+
+    report_mouse_t mouse_rep = pointing_device_get_report();
+
+    if (cnt++ % 50 == 0) {
+        uint8_t pid = read_pid_paw3204();
+        if (pid == 0x30) {
+            dprint("paw3204 OK\n");
+            paw_ready = true;
+        } else {
+            dprintf("paw3204 NG:%d\n", pid);
+            paw_ready = false;
+        }
+    }
+
+    if (paw_ready) {
+        uint8_t stat;
+        int8_t x, y;
+        int8_t r_x, r_y;
+
+        read_paw3204(&stat, &x, &y);
+
+        // 45-degree angle
+        int8_t degree = 45;
+        r_x =  x * cos(degree) + y * sin(degree);
+        r_y = -x * sin(degree) + y * cos(degree);
+        /* normal angle
+        r_x = y;
+        r_y = x;
+        */
+
+        if (isScrollMode) {
+            if (cnt % 5 == 0) {
+                mouse_rep.v = -r_y;
+                mouse_rep.h = r_x;
+            }
+        } else {
+            mouse_rep.x = r_x;
+            mouse_rep.y = r_y;
+        }
+
+        if (cnt % 10 == 0) {
+            dprintf("stat:%3d x:%4d y:%4d\n", stat, mouse_rep.x, mouse_rep.y);
+        }
+
+        if (stat & 0x80) {
+            pointing_device_set_report(mouse_rep);
+        }
+    }
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+    case _LOWER:
+        isScrollMode = true;
+        break;
+    default:
+        isScrollMode = false;
+        break;
+    }
+  return state;
+}
