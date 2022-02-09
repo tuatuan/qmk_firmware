@@ -14,48 +14,72 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
-
+#include "yfuku_keymaps.h"
 #include "paw3204.h"
 #include "pointing_device.h"
 bool isScrollMode;
-
-// Defines names for use in layer keycodes and the keymap
-enum layer_names {
-    _BASE,
-    _LOWER,
-    _RAISE
-};
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   SCRL
 };
 
-#define L_SPC LT(_LOWER, KC_SPC)
-#define R_ENT LT(_RAISE, KC_ENT)
+
+// Defines names for use in layer keycodes and the keymap
+enum layer_names {
+    _BASE,
+    _LOWER,
+    _RAISE,
+    _ADJUST
+};
+
+#define TAPPING_LAYER_TERM 230
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case GS_S:
+      return TAPPING_LAYER_TERM;
+    case GS_L:
+      return TAPPING_LAYER_TERM;
+    case A_D:
+      return TAPPING_LAYER_TERM;
+    case A_K:
+      return TAPPING_LAYER_TERM;
+    default:
+      return TAPPING_TERM;
+  }
+}
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_BASE] = LAYOUT(
-        KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,             KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
-        KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,             KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_RSFT,
-        KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,             KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RCTL,
-                                   KC_LGUI, KC_LANG2,L_SPC,            R_ENT,   KC_LANG1,KC_RALT,
-        KC_BTN1,    KC_BTN2,    KC_3
+    [_BASE] = LAYOUT_wrapper(
+       __QWERTY_L1__, __QWERTY_R1__,
+       __QWERTY_L2__, __QWERTY_R2__,
+       __QWERTY_L3__, __QWERTY_R3__,
+       __QUERTY_T3__,
+       KC_1, KC_2, KC_3
     ),
-    [_LOWER] = LAYOUT(
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_EQL,  KC_PLUS, KC_ASTR, KC_PERC, _______,
-        _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,             KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, _______, _______, _______, _______,
-                                   _______, _______, _______,          KC_DEL,  _______, _______,
-        KC_1,    KC_2,    KC_3
+
+    [_RAISE] = LAYOUT_wrapper(
+       __RAISE_L1__, __RAISE_R1__,
+       __RAISE_L2__, __RAISE_R2__,
+       __RAISE_L3__, __RAISE_R3__,
+       __RAISE_T3__,
+       __TRANSx3__
     ),
-    [_RAISE] = LAYOUT(
-        _______, KC_BSLS, KC_EXLM, KC_AMPR, KC_PIPE, XXXXXXX,          XXXXXXX, KC_EQL,  KC_PLUS, KC_ASTR, KC_PERC, _______,
-        _______, KC_HASH, KC_GRV,  KC_DQT,  KC_QUOT, KC_TILD,          KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_DLR,  _______,
-        _______, XXXXXXX, XXXXXXX, KC_LCBR, KC_LBRC, KC_LPRN,          KC_RPRN, KC_RBRC, KC_RCBR, KC_AT,   KC_CIRC, _______,
-                                   _______, _______, KC_BSPC,          _______, _______, _______,
-        KC_1,    KC_2,    KC_3
-   ),
+
+    [_LOWER] = LAYOUT_wrapper(
+       __LOWER_L1__, __LOWER_R1__,
+       __LOWER_L2__, __LOWER_R2__,
+       __LOWER_L3__, __LOWER_R3__,
+       __LOWER_T3__,
+       __TRANSx3__
+    ),
+    [_ADJUST] = LAYOUT_wrapper(
+       __TRANSx6__, __TRANSx6__, 
+       __TRANSx6__, __TRANSx6__, 
+       __TRANSx6__,  __TRANSx6__, 
+       __TRANSx3__, __TRANSx3__,
+       __TRANSx3__
+    ),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
