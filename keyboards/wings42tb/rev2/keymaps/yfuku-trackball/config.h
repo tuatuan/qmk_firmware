@@ -1,0 +1,7 @@
+#pragma once
+
+#define MASTER_RIGHT
+
+#define TAPPING_TERM 180
+#define IGNORE_MOD_TAP_INTERRUPT
+#define TAPPING_TERM_PER_KEY
