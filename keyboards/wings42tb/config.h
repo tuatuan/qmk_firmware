@@ -19,3 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #include "config_common.h"
+
+#define ADNS5050_SCLK_PIN         B5
+#define ADNS5050_SDIO_PIN         B4
+#define ADNS5050_CS_PIN           B2
+
+#define MASTER_RIGHT

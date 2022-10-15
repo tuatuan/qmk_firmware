@@ -19,4 +19,7 @@ AUDIO_ENABLE = no           # Audio output
 
 SPLIT_KEYBOARD = yes
 
-DEFAULT_FOLDER = wings42/rev2
+DEFAULT_FOLDER = wings42tb/rev2
+
+POINTING_DEVICE_ENABLE = yes
+POINTING_DEVICE_DRIVER = adns5050
