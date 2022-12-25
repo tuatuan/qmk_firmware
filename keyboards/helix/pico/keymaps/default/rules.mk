@@ -9,5 +9,6 @@ LTO_ENABLE = no  # if firmware size over limit, try this option
 # LOCAL_GLCDFONT = no         # use each keymaps "helixfont.h" insted of "common/glcdfont.c"
 LED_BACK_ENABLE = yes        # LED backlight (Enable WS2812 RGB underlight.)
 #LED_UNDERGLOW_ENABLE = yes   # LED underglow (Enable WS2812 RGB underlight.)
-#LED_ANIMATIONS = yes        # LED animations
+LED_ANIMATIONS = yes        # LED animations
 # IOS_DEVICE_ENABLE = no      # connect to IOS device (iPad,iPhone)
+VIA_ENABLE = yes
